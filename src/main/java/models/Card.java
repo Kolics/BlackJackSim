@@ -9,12 +9,10 @@ public class Card {
 
     private final Color color;
     private final Number number;
-    private boolean faceUp;
 
     public Card(Color color, Number number) {
         this.color = color;
         this.number = number;
-        this.faceUp = false;
     }
 
     public static Card draw() {
@@ -24,10 +22,6 @@ public class Card {
         return new Card(
                 colors[rand.nextInt(colors.length)],
                 numbers[rand.nextInt(numbers.length)]);
-    }
-
-    public void flip() {
-        faceUp = true;
     }
 
     public int getValue() {
@@ -51,10 +45,6 @@ public class Card {
 
     public Number getNumber() {
         return number;
-    }
-
-    public boolean isFaceUp() {
-        return faceUp;
     }
 
     @Override

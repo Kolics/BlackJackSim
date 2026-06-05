@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import models.*;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GameViewController implements Initializable {
@@ -25,10 +25,15 @@ public class GameViewController implements Initializable {
     @FXML private HBox cardBox;
 
     private GameController gameController;
+    private ResultManager resultManager;
+    private long time;
+    private int answer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gameController = new GameController();
+        resultManager = new ResultManager();
+        displayTopResults();
     }
 
     @FXML
@@ -36,6 +41,12 @@ public class GameViewController implements Initializable {
         gameController.start();
         updateCardDisplay();
         answerField.clear();
+        answerField.setDisable(false);
+        if (gameController.isBlackJack()) {
+            updateCardDisplay();
+            answerField.setDisable(true);
+            systemOutputLabel.setText("BlackJack!");
+        }
     }
 
     private void updateCardDisplay() {
@@ -85,13 +96,15 @@ public class GameViewController implements Initializable {
     @FXML
     private void submit() {
         try {
-            int answer = Integer.parseInt(answerField.getText().trim());
-            long elapsed = gameController.getTime();
+            answer = Integer.parseInt(answerField.getText().trim());
+            time = gameController.getTime();
             boolean correct = gameController.isCorrectAnswer(answer);
             systemOutputLabel.setText("");
 
             if (correct) {
-                systemOutputLabel.setText("Correct! " + elapsed + "ms");
+                resultManager.save(getResult());
+                displayTopResults();
+                systemOutputLabel.setText("Correct! " + time + "ms");
             } else {
                 systemOutputLabel.setText("Wrong. Answer was: " + gameController.getHand().getTotal());
             }
@@ -101,9 +114,45 @@ public class GameViewController implements Initializable {
                 updateCardDisplay();
                 answerField.clear();
             }
+            else {
+                gameController.deal();
+                updateCardDisplay();
+                answerField.setDisable(true);
+            }
 
         } catch (NumberFormatException e) {
             systemOutputLabel.setText("Please enter a number.");
         }
+    }
+
+    private Result getResult() {
+        String resultString;
+        int lastTotal = gameController.getLastTotal();
+        long lastTime = time;
+
+        if (gameController.isInitPair()) {
+            Card card1 = gameController.getHand().getCards().get(0);
+            Card card2 = gameController.getHand().getCards().get(1);
+            resultString = card1.getValue() + " + " + card2.getValue();
+        } else {
+            resultString = lastTotal + " + " + gameController.getLastCard().getValue();
+        }
+
+        Result result = new Result(resultString, answer , lastTime);
+
+        return result;
+    }
+
+    private void displayTopResults() {
+        List<Result> topResults = resultManager.getTopResults(10);
+        StringBuilder highScoreText = new StringBuilder();
+        int pos = 1;
+
+        for (Result result : topResults) {
+            highScoreText.append(pos).append(". ").append(result.toString()).append("\n");
+            pos++;
+        }
+
+        endResultLabel.setText(highScoreText.toString());
     }
 }
