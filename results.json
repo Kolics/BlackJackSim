@@ -1,0 +1,100 @@
+[
+  {
+    "sumOf": "13 + 2",
+    "answer": 15,
+    "time": 2800,
+    "seconds": 2,
+    "milliseconds": 800
+  },
+  {
+    "sumOf": "15 + 5",
+    "answer": 20,
+    "time": 2854,
+    "seconds": 2,
+    "milliseconds": 854
+  },
+  {
+    "sumOf": "10 + 6",
+    "answer": 16,
+    "time": 2787,
+    "seconds": 2,
+    "milliseconds": 787
+  },
+  {
+    "sumOf": "16 + 11",
+    "answer": 17,
+    "time": 3998,
+    "seconds": 3,
+    "milliseconds": 998
+  },
+  {
+    "sumOf": "10 + 10",
+    "answer": 20,
+    "time": 2820,
+    "seconds": 2,
+    "milliseconds": 820
+  },
+  {
+    "sumOf": "3 + 10",
+    "answer": 13,
+    "time": 3893,
+    "seconds": 3,
+    "milliseconds": 893
+  },
+  {
+    "sumOf": "13 + 9",
+    "answer": 22,
+    "time": 4077,
+    "seconds": 4,
+    "milliseconds": 77
+  },
+  {
+    "sumOf": "2 + 11",
+    "answer": 13,
+    "time": 3856,
+    "seconds": 3,
+    "milliseconds": 856
+  },
+  {
+    "sumOf": "3 + 4",
+    "answer": 17,
+    "time": 2668,
+    "seconds": 2,
+    "milliseconds": 668
+  },
+  {
+    "sumOf": "7 + 3",
+    "answer": 10,
+    "time": 3983,
+    "seconds": 3,
+    "milliseconds": 983
+  },
+  {
+    "sumOf": "10 + 9",
+    "answer": 19,
+    "time": 2397,
+    "seconds": 2,
+    "milliseconds": 397
+  },
+  {
+    "sumOf": "4 + 5",
+    "answer": 9,
+    "time": 1809,
+    "seconds": 1,
+    "milliseconds": 809
+  },
+  {
+    "sumOf": "4 + 10",
+    "answer": 14,
+    "time": 2444,
+    "seconds": 2,
+    "milliseconds": 444
+  },
+  {
+    "sumOf": "3 + 7",
+    "answer": 10,
+    "time": 3593,
+    "seconds": 3,
+    "milliseconds": 593
+  }
+]
