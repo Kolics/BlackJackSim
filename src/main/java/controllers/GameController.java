@@ -12,6 +12,13 @@ public class GameController {
     private int lastTotal;
     private boolean isInitPair;
 
+    public GameController() {
+    }
+
+    public GameController(Hand hand) {
+        this.hand = hand;
+    }
+
     public void start() {
         hand = new Hand();
         hand.deal(Card.draw());
